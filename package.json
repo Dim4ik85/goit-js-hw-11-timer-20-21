@@ -1,0 +1,33 @@
+{
+  "name": "goit-js-hw-11-promisification-20-21",
+  "version": "1.0.0",
+  "description": "Переключатель цветов\r Есть массив цветов в hex-формате и кнопки Start и Stop.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "parcel src/*.html",
+    "build": "parcel build src/index.html --public-url /goit-js-hw-11-promisification-20-21/",
+    "deploy": "gh-pages -d dist",
+    "predeploy": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dim4ik85/goit-js-hw-11-promisification-20-21.git"
+  },
+  "author": "Dim4ik85",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dim4ik85/goit-js-hw-11-promisification-20-21/issues"
+  },
+  "homepage": "https://github.com/Dim4ik85/goit-js-hw-11-promisification-20-21/",
+  "dependencies": {
+    "gh-pages": "^3.1.0",
+    "parcel-bundler": "^1.12.4",
+    "parcel-plugin-nuke-dist": "^1.0.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.1",
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
+    "parcel-plugin-handlebars-precompile": "^1.0.2"
+  }
+}
