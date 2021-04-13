@@ -1,6 +1,12 @@
-const date = new Date();
-console.log(date); // Mon Mar 19 2018 16:51:32 GMT+0200 (FLE Standard Time)
+// const date = new Date();
+// console.log(date); // Mon Mar 19 2018 16:51:32 GMT+0200 (FLE Standard Time)
 
+const timer = {
+  start() {
+    const startTime = Date.now();
+    console.log(startTime);
+  },
+};
 
 
 
