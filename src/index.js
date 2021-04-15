@@ -1,46 +1,80 @@
-// const date = new Date();
-// console.log(date); // Mon Mar 19 2018 16:51:32 GMT+0200 (FLE Standard Time)
+import  './css/timer.css';
 
-const timer = {
-  start() {
-    const startTime = Date.now();
-    console.log(startTime);
-  },
+const refs = {
+    timer: document.querySelector('#timer-1'),
+    days: document.querySelector('span[data-value="days"]'),
+    hours: document.querySelector('span[data-value="hours"]'),
+    mins: document.querySelector('span[data-value="mins"]'),
+    secs: document.querySelector('span[data-value="secs"]'),
 };
 
+class CountdownTimer {
+  constructor({selector, targetDate}) {
+    this.selector = selector;
+    this.targetDate = targetDate;
+    console.log(selector);
+  }
 
+  intervalId = null;
+
+  intervalId = setInterval(() => {
+    const currentTime = Date.now();
+   // console.log('start -> currentTime', currentTime);
+   // console.log('start -> currentTime', currentTime);
+   //const deltaTime = currentTime - startTime;
+
+   const deltaTime = this.targetDate - currentTime;
+   console.log(deltaTime);
+   let time = this.getTimeComponents(deltaTime);
+
+  //  console.log(timeComponents = {days,hours, mins, secs});
+  // console.log({days,hours, mins, secs});
+   // console.log(`${days}:${hours}:${mins}:${secs}`);
+
+   this.updateClockface(time);
+
+   const {days,hours, mins, secs} = time;
+   console.log(time);
+
+  }, 1000);
+
+  finishTime() {
+    clearInterval(this.intervalId);
+    }
+//Принимает число, приводит к строке и добавляет в начало 0
+//если число меньше 2-х знаков
+
+  pad(value) {
+    return String(value).padStart(2, '0');
+  }
 
 //Для подсчета значений используй следующие готовые формулы, 
 //где time - разница между targetDate и текущей датой.
-/*
- * Оставшиеся дни: делим значение UTC на 1000 * 60 * 60 * 24, количество
- * миллисекунд в одном дне (миллисекунды * секунды * минуты * часы)
- */
-const days = Math.floor(time / (1000 * 60 * 60 * 24));
 
-/*
- * Оставшиеся часы: получаем остаток от предыдущего расчета с помощью оператора
- * остатка % и делим его на количество миллисекунд в одном часе
- * (1000 * 60 * 60 = миллисекунды * минуты * секунды)
- */
-const hours = Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  getTimeComponents(time) {
+      const days = this.pad(Math.floor(time / (1000 * 60 * 60 * 24)));
+      const hours = this.pad(Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
+      const mins = this.pad(Math.floor((time % (1000 * 60 * 60)) / (1000 * 60)));
+      const secs = this.pad(Math.floor((time % (1000 * 60)) / 1000));
 
-/*
- * Оставшиеся минуты: получаем оставшиеся минуты и делим их на количество
- * миллисекунд в одной минуте (1000 * 60 = миллисекунды * секунды)
- */
-const mins = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60));
+    return {days,hours, mins, secs};
+  }
+  
+  
 
-/*
- * Оставшиеся секунды: получаем оставшиеся секунды и делим их на количество
- * миллисекунд в одной секунде (1000)
- */
-const secs = Math.floor((time % (1000 * 60)) / 1000);
+  updateClockface({days,hours, mins, secs}){
+        refs.days.innerHTML = days;
+        refs.hours.innerHTML = hours;
+        refs.mins.innerHTML = mins;
+        refs.secs.innerHTML = secs;
+    }
+
+}
 
 
 
 //Плагин это класс CountdownTimer, экземпляр которого создает новый таймер с настройками.
 new CountdownTimer({
     selector: '#timer-1',
-    targetDate: new Date('Jul 17, 2021'),
+    targetDate: new Date('April 30, 2021'),
   });
